@@ -1,0 +1,2 @@
+import { Router } from 'express'; import jwt from 'jsonwebtoken'; import { env } from '../config/env.js';
+const router=Router(); router.post('/login',(req,res)=>{ const { username,password }=req.body; if(username!==env.adminUsername||password!==env.adminPassword) return res.status(401).json({error:{message:'Invalid credentials'}}); res.json({ token: jwt.sign({ role:'admin', username }, env.jwtSecret, { expiresIn:'8h' }) }); }); export default router;

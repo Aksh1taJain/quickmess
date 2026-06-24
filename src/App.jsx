@@ -1,30 +1,42 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import BottomNav from './components/BottomNav';
-import Home from './pages/Home';
-import Menu from './pages/Menu';
-import Tickets from './pages/Tickets';
-import BuyTicket from './pages/BuyTicket';
-import TicketView from './pages/TicketView';
-import Feedback from './pages/Feedback';
-import Profile from './pages/Profile';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import {
+  AdminDashboard,
+  AdminLogin,
+  BuyTicket,
+  Home,
+  Menu,
+  TicketSuccess,
+  TicketView,
+  VerifyTicket,
+} from './pages/Pages.jsx';
+
+function Navigation() {
+  return (
+    <nav className="dock" aria-label="Primary navigation">
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/menu">Menu</NavLink>
+      <NavLink to="/buy">Buy</NavLink>
+      <NavLink to="/admin">Admin</NavLink>
+    </nav>
+  );
+}
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="app-shell">
-        <div className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/tickets" element={<Tickets />} />
-            <Route path="/buy" element={<BuyTicket />} />
-            <Route path="/ticket/:ticketId" element={<TicketView />} />
-            <Route path="/feedback" element={<Feedback />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </div>
-        <BottomNav />
-      </div>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/buy" element={<BuyTicket />} />
+          <Route path="/success/:id" element={<TicketSuccess />} />
+          <Route path="/ticket/:id" element={<TicketView />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/verify" element={<VerifyTicket />} />
+        </Routes>
+      </main>
+      <Navigation />
     </BrowserRouter>
   );
 }
